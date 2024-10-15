@@ -11,14 +11,14 @@ home = [ "HTML", "RSS", "JSON"]
   # Git hub repo link
   editURL = ""
   description = ""
-  author = "journeyoftheaverageguy@gmail.com"
+  author = "phamphatvn@gmail.com"
   showVisitedLinks = true
   disableBreadcrumb = false
   disableNextPrev = false
   
 [Languages]
 [Languages.en]
-title = "AWS Account Setup"
+title = "with Fuderr Phạm"
 weight = 1
 languageName = "English"
 
@@ -29,7 +29,7 @@ url = "https://www.facebook.com/groups/awsstudygroupfcj/"
 weight = 20
 
 [Languages.vi]
-title = "Thiết lập AWS Account"
+title = "with Fuderr Phạm"
 weight = 2
 languageName = "Tiếng Việt"
 
@@ -39,3 +39,4 @@ identifier = "AWS Study Group FB"
 url = "https://www.facebook.com/groups/awsstudygroupfcj/"
 weight = 20
 
+baseURL = "https://workshop-serverless-amplify.vercel.app/"
