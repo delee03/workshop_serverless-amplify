@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Introduction on with Fuderr Phạm</title>
-    <link>//localhost:1313/0-introdution/</link>
+    <link>/0-introdution/</link>
     <description>Recent content in Introduction on with Fuderr Phạm</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="//localhost:1313/0-introdution/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/0-introdution/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

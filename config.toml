@@ -5,7 +5,7 @@ theme = "hugo-theme-learn"
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
 
-baseURL = "https://workshop-serverless-amplify.vercel.app/"
+baseURL = "https://workshop-serverless-amplify.vercel.app"
 canonifyURLs = true
 
 
@@ -37,7 +37,7 @@ weight = 20
 title = "with Fuderr Phạm"
 weight = 2
 languageName = "Tiếng Việt"
-contentDir = "content/vi"
+
 
 [[Languages.vi.menu.shortcuts]]
 name = "<i class='fab fa-facebook'></i> AWS Study Group"

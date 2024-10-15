@@ -2,11 +2,11 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Implement the UI on with Fuderr Phạm</title>
-    <link>//localhost:1313/5-add-interactivity/3-implement-the-ui/</link>
+    <link>/5-add-interactivity/3-implement-the-ui/</link>
     <description>Recent content in Implement the UI on with Fuderr Phạm</description>
     <generator>Hugo</generator>
     <language>en</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="//localhost:1313/5-add-interactivity/3-implement-the-ui/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="/5-add-interactivity/3-implement-the-ui/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
