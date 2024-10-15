@@ -4,7 +4,7 @@ theme = "hugo-theme-learn"
 
 
 relativeURLs = true
-canonifyURLs = true
+
 
 # For search functionality
 [outputs]
