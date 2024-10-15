@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Chỉnh sửa giao diện App on Thiết lập AWS Account</title>
-    <link>//localhost:1313/vi/5-add-interactivity/2-style-the-app-ui/</link>
-    <description>Recent content in Chỉnh sửa giao diện App on Thiết lập AWS Account</description>
+    <title>Chỉnh sửa giao diện App on with Fuderr Phạm</title>
+    <link>http://localhost:1313/vi/5-add-interactivity/2-style-the-app-ui/</link>
+    <description>Recent content in Chỉnh sửa giao diện App on with Fuderr Phạm</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="//localhost:1313/vi/5-add-interactivity/2-style-the-app-ui/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/vi/5-add-interactivity/2-style-the-app-ui/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

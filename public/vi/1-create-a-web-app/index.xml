@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tạo và triển khai ứng dụng Web với ReactJS on Thiết lập AWS Account</title>
-    <link>//localhost:1313/vi/1-create-a-web-app/</link>
-    <description>Recent content in Tạo và triển khai ứng dụng Web với ReactJS on Thiết lập AWS Account</description>
+    <title>Tạo và triển khai ứng dụng Web với ReactJS on with Fuderr Phạm</title>
+    <link>http://localhost:1313/vi/1-create-a-web-app/</link>
+    <description>Recent content in Tạo và triển khai ứng dụng Web với ReactJS on with Fuderr Phạm</description>
     <generator>Hugo</generator>
     <language>vi</language>
     <lastBuildDate></lastBuildDate>
-    <atom:link href="//localhost:1313/vi/1-create-a-web-app/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/vi/1-create-a-web-app/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
