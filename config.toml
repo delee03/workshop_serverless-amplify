@@ -1,14 +1,13 @@
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
 
-baseURL = "https://workshop-serverless-amplify.vercel.app/"
-
-relativeURLs = true
-canonifyURLs = true
-
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
+
+baseURL = "https://workshop-serverless-amplify.vercel.app/"
+canonifyURLs = true
+
 
 [params]
   # Change default color scheme with a variant one. Can be "red", "blue", "green".
@@ -26,6 +25,7 @@ home = [ "HTML", "RSS", "JSON"]
 title = "with Fuderr Phạm"
 weight = 1
 languageName = "English"
+contentDir = "content/en"
 
 [[Languages.en.menu.shortcuts]]
 name = "<i class='fab fa-facebook'></i> AWS Study Group"
@@ -37,6 +37,7 @@ weight = 20
 title = "with Fuderr Phạm"
 weight = 2
 languageName = "Tiếng Việt"
+contentDir = "content/vi"
 
 [[Languages.vi.menu.shortcuts]]
 name = "<i class='fab fa-facebook'></i> AWS Study Group"
