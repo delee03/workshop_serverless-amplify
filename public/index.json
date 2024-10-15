@@ -1,17 +1,17 @@
 [
 {
+	"uri": "//localhost:1313/",
+	"title": "Build A Web Application with AWS Amplify",
+	"tags": [],
+	"description": "",
+	"content": "Building a Web Application using AWS Amplify Overview In this workshop, you will learn to create a simple full-stack web application using AWS Amplify. Throughout this workshop, you will build and host a React application on AWS, use Amplify to add authentication, data, and a serverless function to capture the signed-up user\u0026rsquo;s email and save it in the database. Then, you will implement a frontend for your app that integrates with your cloud resources.\nArchitect Schema The following diagram provides a visual representation of the services used in this simple lab and how they are connected. This application uses AWS Amplify, GraphQL API, AWS Lambda, and Amazon DynamoDB.\nAs you go through the workshop, you will learn about the services in detail and find resources that will help you get up to speed with them.\nWhat you will accomplish Host: Build and deploy a React application on the AWS global content delivery network (CDN).\nAuthenticate: Add authentication to your app to enable sign-in and sign-out functionality.\nDatabase: Integrate a real-time API, database, and a serverless function.\nFunction: Implement a lambda function that is triggered when a user signs up to the App.\nRequired An AWS account: with administrator permission\nNodejs and npm: Installed on your computer\nGit \u0026amp; GitHub account: Foundational knowledge of Visual Studio Code: Installed on your computer\nIf you have a FreeTier Account, that\u0026rsquo;s so great\nAccounts created within the past 24 hours might not yet have access to the services required for this lab\nMain content Introduction Create \u0026amp; Deploy a Web Application with ReactJS Build Serverless function with AWS Lamda Create Data Table with DynamoDB Link Serverless function to Web Application Add interactivity to web app Clean up resources "
+},
+{
 	"uri": "//localhost:1313/5-add-interactivity/1-install-the-amplify-libraries/",
 	"title": "Install the Amplify Libraries",
 	"tags": [],
 	"description": "",
 	"content": " To install the Amplify libraries, run the following command in your terminal:\nnpm install aws-amplify @aws-amplify/ui-react or you can use this command : npm i @aws-amplify/ui-react This command installs the Amplify libraries and the UI components for React.\n"
-},
-{
-	"uri": "//localhost:1313/",
-	"title": "Introduction of this Workshop",
-	"tags": [],
-	"description": "",
-	"content": "Building a Web Application using AWS Amplify Overview In this workshop, you will learn to create a simple full-stack web application using AWS Amplify. Throughout this workshop, you will build and host a React application on AWS, use Amplify to add authentication, data, and a serverless function to capture the signed-up user\u0026rsquo;s email and save it in the database. Then, you will implement a frontend for your app that integrates with your cloud resources.\nArchitect Schema The following diagram provides a visual representation of the services used in this simple lab and how they are connected. This application uses AWS Amplify, GraphQL API, AWS Lambda, and Amazon DynamoDB.\nAs you go through the workshop, you will learn about the services in detail and find resources that will help you get up to speed with them.\nWhat you will accomplish Host: Build and deploy a React application on the AWS global content delivery network (CDN).\nAuthenticate: Add authentication to your app to enable sign-in and sign-out functionality.\nDatabase: Integrate a real-time API, database, and a serverless function.\nFunction: Implement a lambda function that is triggered when a user signs up to the App.\nRequired An AWS account: with administrator permission\nNodejs and npm: Installed on your computer\nGit \u0026amp; GitHub account: Foundational knowledge of Visual Studio Code: Installed on your computer\nIf you have a FreeTier Account, that\u0026rsquo;s so great\nAccounts created within the past 24 hours might not yet have access to the services required for this lab\nMain content Introduction Create \u0026amp; Deploy a Web Application with ReactJS Build Serverless function with AWS Lamda Create Data Table with DynamoDB Link Serverless function to Web Application Add interactivity to web app Clean up resources "
 },
 {
 	"uri": "//localhost:1313/5-add-interactivity/2-style-the-app-ui/",

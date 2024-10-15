@@ -1,5 +1,5 @@
 +++
-title = "Introduction of this Workshop"
+title = "Build A Web Application with AWS Amplify"
 date = 2024
 weight = 1
 chapter = false
