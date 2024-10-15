@@ -2,10 +2,6 @@
 theme = "hugo-theme-learn"
 
 
-
-relativeURLs = true
-
-
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
