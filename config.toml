@@ -25,7 +25,7 @@ canonifyURLs = true
 title = "with Fuderr Phạm"
 weight = 1
 languageName = "English"
-contentDir = "content/en"
+
 
 [[Languages.en.menu.shortcuts]]
 name = "<i class='fab fa-facebook'></i> AWS Study Group"
