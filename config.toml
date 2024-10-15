@@ -1,6 +1,10 @@
 # Change the default theme to be use when building the site with Hugo
 theme = "hugo-theme-learn"
 
+baseURL = "https://workshop-serverless-amplify.vercel.app/"
+
+canonifyURLs = true
+
 # For search functionality
 [outputs]
 home = [ "HTML", "RSS", "JSON"]
@@ -39,4 +43,3 @@ identifier = "AWS Study Group FB"
 url = "https://www.facebook.com/groups/awsstudygroupfcj/"
 weight = 20
 
-baseURL = "https://workshop-serverless-amplify.vercel.app/"
