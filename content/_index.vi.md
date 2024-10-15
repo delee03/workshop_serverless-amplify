@@ -1,40 +1,51 @@
 +++
-title = "Thiết lập Tài Khoản AWS"
-date = 2021
+title = "Giới thiệu về workshop"
+date = 2024
 weight = 1
 chapter = false
+pre = "<b>1. </b>"
 +++
 
-# Tạo tài khoản AWS đầu tiên
+# Xây dựng ứng dụng web sử dụng AWS Amplify
 
 #### Tổng quan
-Trong bài lab đầu tiên này, bạn sẽ tạo mới **tài khoản AWS** đầu tiên của mình, tạo **MFA** (Multi-factor Authentication) để gia tăng bảo mật tài khoản của bạn. Bước tiếp theo bạn sẽ tạo **Admin Group**, **Admin User** để quản lý quyền truy cập vào các tài nguyên trong tài khoản của mình thay vì sử dụng user root.\
-Cuối cùng, nếu quá trình xác thực tài khoản của bạn có vấn đề, bạn sẽ được hướng dẫn hỗ trợ xác thực tài khoản với **AWS Support**.
 
-#### Tài khoản AWS (AWS Account)
-**Tài khoản AWS** là phương tiện để bạn có thể truy cập và sử dụng những tài nguyên và dịch vụ của AWS. Theo mặc định, mỗi tài khoản AWS sẽ có một *root user*. *Root user* có toàn quyền với tài khoản AWS của bạn, và quyền hạn của root user không thể bị giới hạn. Nếu bạn mới sử dụng tài khoản AWS lần đầu tiên, bạn sẽ truy cập vào tài khoản dưới danh nghĩa của *root user*.
+Trong workshop này, bạn sẽ học cách tạo một **ứng dụng web full-stack đơn giản** sử dụng **AWS Amplify**. Xuyên suốt workshop, bạn sẽ **xây dựng** và **host** một ứng dụng React **trên AWS**, sử dụng Amplify để **thêm tính năng xác thực**, **dữ liệu**, và **một hàm serverless** để thu thập email của người dùng đã đăng ký và lưu nó vào cơ sở dữ liệu. Sau đó, bạn sẽ triển khai một frontend cho ứng dụng của mình, **tích hợp với các tài nguyên đám mây** của bạn.
 
-{{% notice note %}}
-Chính vì quyền hạn của **root user** không thể bị giới hạn, AWS khuyên bạn không nên sử dụng trực tiếp *root user* cho bất kỳ công tác nào. Thay vào đó, bạn nên tạo ra một *IAM User* và trao quyền quản trị cho *IAM User* đó để dễ dàng quản lý và giảm thiểu rủi ro.
-{{% /notice %}}
+#### Lược đồ kiến trúc
 
-#### MFA (Multi-factor Authentication)
-**MFA** là một tính năng được sử dụng để gia tăng bảo mật của tài khoản AWS. Nếu MFA được kích hoạt, bạn sẽ phải nhập mã OTP (One-time Password) mỗi lần bạn đăng nhập vào tài khoản AWS.
+Sơ đồ sau đây cung cấp một hình ảnh trực quan về các dịch vụ được sử dụng trong lab đơn giản này và cách chúng được kết nối. Ứng dụng này sử dụng **AWS Amplify, GraphQL API, AWS Lambda, và Amazon DynamoDB.**
 
-#### IAM Group 
-**IAM Group**  là một công cụ quản lý người dùng (*IAM User*) của AWS. Một IAM Group có thể chứa nhiều IAM User. Các IAM User ở trong một IAM Group đều hưởng chung quyền hạn mà IAM Group đó được gán cho.
+Khi bạn đi qua workshop, bạn sẽ tìm hiểu chi tiết về các dịch vụ này và tìm thấy các tài nguyên giúp bạn nắm bắt chúng nhanh chóng.
 
-#### IAM User
-**IAM User** là một đơn vị người dùng của AWS. Khi bạn đăng nhập vào AWS, bạn sẽ phải đăng nhập dưới danh nghĩa của một IAM User. Nếu bạn mới đăng nhập vào AWS lần đầu tiên, bạn sẽ đăng nhập dưới danh nghĩa của *root user* (tạm dịch là người dùng gốc). Ngoài *root user* ra, bạn có thể tạo ra nhiều IAM User khác để cho phép người khác truy cập **dài hạn** vào tài nguyên AWS trong tài khoản AWS của bạn.
+![Architecture Application Schema](/images/workshop-setup/ArchitectureSystem.png?width=90pc)
 
+#### Những gì bạn sẽ đạt được
 
-#### AWS Support
-**AWS Support** là một đơn vị cung cấp các dịch vụ hỗ trợ khách hàng của AWS.
+**Host**: Xây dựng và triển khai một ứng dụng React trên mạng phân phối nội dung toàn cầu (CDN) của AWS.  
+**Authenticate**: Thêm xác thực vào ứng dụng của bạn để kích hoạt chức năng đăng nhập và đăng xuất.  
+**Database**: Tích hợp API thời gian thực, cơ sở dữ liệu và một hàm serverless.
+**Function**: Triển khai một hàm lambda được kích hoạt khi người dùng đăng ký vào ứng dụng.
 
+#### Yêu cầu
+
+**1 tài khoản AWS:** với quyền quản trị viên  
+**Nodejs and npm:** Đã cài đặt trên máy tính của bạn  
+**Git & GitHub account:** Kiến thức cơ bản về Git và GitHub
+**Visual Studio Code:** Đã cài đặt trên máy tính của bạn  
+**Nếu bạn có tài khoản AWS FreeTier thì thật tuyệt vời**
+
+{{% notice note%}}
+Các tài khoản được tạo trong vòng 24 giờ qua có thể chưa có quyền truy cập vào các dịch vụ cần thiết cho lab này
+{{% /notice%}}
 
 #### Nội dung chính
 
-1. [Tạo tài khoản AWS](1-create-new-aws-account/)
-2. [Thiết lập MFA cho tài khoản AWS (Root)](2-mfa-setup-for-aws-user-(root)/)
-3. [Tài khoản và Nhóm Admin](3-create-admin-user-and-group/)
-4. [Hỗ trợ Xác thực Tài khoản](4-verify-new-account/)
+1. [Giới thiệu](0-Introdution/)
+2. [Tạo và Triển khai 1 ứng dụng web ReactJS](1-Create-A-Web-App/)
+3. [Xây dựng hàm Serverless với AWS Lamda](2-Build-A-ServerlessFunction-Lamda/)
+4. [Tạo data table với DynamoDB](3-Create-Data-Table/)
+5. [Liên kết hàm Serverless đến ứng dụng Web](4-Link-ServerlessFunction-ToWebApp/)
+6. [Thêm tính tương tác vào ứng dụng web](5-Add-Interactivity/)
+7. [Dọn dẹp tài nguyên](6-CleanUp/)
+ <!-- need to remove parenthesis for path in Hugo 0.88.1 for Windows-->

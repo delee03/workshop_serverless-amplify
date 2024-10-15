@@ -1,18 +1,44 @@
 +++
-title = "MFA cho Tài khoản AWS"
-date = 2021
+title = "Xây dựng hàm Serverless với AWS Lamda"
+date = 2024
 weight = 4
 chapter = false
 pre = "<b>3. </b>"
 +++
 
-Trong bước ngày, bạn có sử dụng ba thiết bị MFA khác nhau.  
-Một là các thiết bị (ứng dụng) MFA ảo trên smartphone như là Microsoft Authenticator, Google Authenticator, và Okta Verify.  
-Hai là khóa bảo mật U2F cứng.  
-Ba là các thiết bị MFA phần cứng khác như khóa bảo mật Gemalto.
+#### Tạo 1 hàm Lambda
 
-#### Nội Dung
+Trong phần này, bạn sẽ tạo một hàm Lambda được kích hoạt khi người dùng đăng ký vào ứng dụng. Hàm Lambda sẽ thu thập email của người dùng và lưu nó vào cơ sở dữ liệu.
 
-1. [Thiết lập với thiết bị MFA ảo](1-virtual-mfa-device)
-2. [Thiết lập với Khóa Bảo mật U2F](2-u2f-security-key)
-3. [Thiết lập với thiết bị MFA phần cứng khác](3-other-hardware-mfa-device)
+Trong thư mục dự án của bạn:
+
+1. Di chuyển đến thư mục profilesapp/amplify/auth
+2. Tạo một thư mục mới bên trong thư mục amplify/auth và đặt tên là _**post-confirmation**_
+3. Sau đó tạo 2 tệp trong thư mục _**post-confirmation**_, đặt tên là **resource.ts** và **handler.ts** tương ứng.
+   ![Create Lambda Function](/images/workshop-setup/2_1_create_folder_post.png?width=full)
+
+#### Cập nhật tệp resource.ts với mã sau, sau đó lưu lại:
+
+![Update Resource.TS](/images/workshop-setup/2_1_updateResourceTS.png?width=full)
+
+```bash
+import { defineFunction } from '@aws-amplify/backend';
+
+export const postConfirmation = defineFunction({
+  name: 'post-confirmation',
+});
+```
+
+#### Cập nhật tệp handler.ts với mã sau, sau đó lưu lại:
+
+![Update Handler.TS](/images/workshop-setup/2_1_updateHandlerTS.png?width=full)
+
+```bash
+import type { PostConfirmationTriggerHandler } from "aws-lambda";
+
+export const handler: PostConfirmationTriggerHandler = async (event) => {
+  return event;
+};
+```
+
+Bạn đã tạo thành công một hàm Lambda sử dụng Amplify. Hàm được đặt tên là post-confirmation và được kích hoạt khi người dùng đăng ký vào ứng dụng. Hàm trả về đối tượng sự kiện.

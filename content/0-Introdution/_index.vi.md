@@ -1,83 +1,49 @@
 +++
-title = "Khóa bảo mật U2F"
-date = 2021
-weight = 1
+title = "Giới thiệu"
+date = 2024
+weight = 2
 chapter = false
-pre = "<b>0. </b>"
+pre = "<b>1. </b>"
 +++
 
-**Nội dung**
+#### Tổng quan
 
--   [Kích hoạt khóa bảo mật U2F thông qua Console](#kích-hoạt-khóa-bảo-mật-u2f-thông-qua-console)
+Trong workshop này, bạn sẽ học cách tạo một **ứng dụng web full-stack đơn giản** sử dụng **AWS Amplify**. Xuyên suốt workshop, bạn sẽ **xây dựng** và **host** một ứng dụng React **trên AWS**, sử dụng Amplify để **thêm tính năng xác thực**, **dữ liệu**, và **một hàm serverless** để thu thập email của người dùng đã đăng ký và lưu nó vào cơ sở dữ liệu. Sau đó, bạn sẽ triển khai một frontend cho ứng dụng của mình, **tích hợp với các tài nguyên đám mây** của bạn.
 
-{{%notice tip%}}
-Nếu bạn không có thiết bị phần cứng , có thể bỏ qua các thao tác dưới đây nhé.
-{{%/notice%}}
+#### Lược đồ kiến trúc
 
-#### Kích hoạt khóa bảo mật U2F thông qua Console
+Sơ đồ sau đây cung cấp một hình ảnh trực quan về các dịch vụ được sử dụng trong lab đơn giản này và cách chúng được kết nối. Ứng dụng này sử dụng **AWS Amplify, GraphQL API, AWS Lambda, và Amazon DynamoDB.**
 
-U2F Security Key là một giao thức chứng thực mở cho phép người dùng có thể truy cập các dịch vụ trực tuyếp với một khóa bảo mật duy nhất mà không cần sử dụng đến bất kì phần mềm nào.
+Khi bạn đi qua workshop, bạn sẽ tìm hiểu chi tiết về các dịch vụ này và tìm thấy các tài nguyên giúp bạn nắm bắt chúng nhanh chóng.
 
-1. Đăng nhập vào AWS Console.
-2. Góc trên bên phải, bạn sẽ thấy tên account của bạn, chọn vào và chọn **My Security Credentials** sau đó mở rộng Multi-factor authentication (MFA).
+![Architecture Application Schema](/images/workshop-setup/ArchitectureSystem.png?width=90pc)
 
-![Image](/images/1-account-setup/MySecurity_v1.png?width=15pc)
+#### Những gì bạn sẽ đạt được
 
-3. Để quản lí khóa bảo mật U2F, bạn phải có quyền từ bộ quyền sau. ở thanh bên trái, chọn **Policies** sau đó chọn **Create policy**, chọn **JSON** tab và dán phần bên dưới vào:
+**Host**: Xây dựng và triển khai một ứng dụng React trên mạng phân phối nội dung toàn cầu (CDN) của AWS.  
+**Authenticate**: Thêm xác thực vào ứng dụng của bạn để kích hoạt chức năng đăng nhập và đăng xuất.  
+**Database**: Tích hợp API thời gian thực, cơ sở dữ liệu và một hàm serverless.
+**Function**: Triển khai một hàm lambda được kích hoạt khi người dùng đăng ký vào ứng dụng.
 
-```js
-{
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Sid": "AllowManageOwnUserMFA",
-            "Effect": "Allow",
-            "Action": [
-                "iam:DeactivateMFADevice",
-                "iam:EnableMFADevice",
-                "iam:GetUser",
-                "iam:ListMFADevices",
-                "iam:ResyncMFADevice"
-            ],
-            "Resource": "arn:aws:iam::*:user/${aws:username}"
-        },
-        {
-            "Sid": "DenyAllExceptListedIfNoMFA",
-            "Effect": "Deny",
-            "NotAction": [
-                "iam:EnableMFADevice",
-                "iam:GetUser",
-                "iam:ListMFADevices",
-                "iam:ResyncMFADevice"
-            ],
-            "Resource": "arn:aws:iam::*:user/${aws:username}",
-            "Condition": {
-                "BoolIfExists": {
-                    "aws:MultiFactorAuthPresent": "false"
-                }
-            }
-        }
-    ]
-}
-```
+#### Yêu cầu
 
-4. Chọn **Next: Tags**. Đây là màn hình về **Tags** một công cụ dùng để phân biệt các tài nguyên của AWS.
-5. Chọn **Next: Review**. Đây là màn hình cho phép bạn review về bộ quyền mà bạn đang tạo ra.
-6. Nhập tên bộ quyền (ví dụ: MFAHardDevice) và chọn **Create policy**.
+**1 tài khoản AWS:** với quyền quản trị viên  
+**Nodejs and npm:** Đã cài đặt trên máy tính của bạn  
+**Git & GitHub account:** Kiến thức cơ bản về Git và GitHub
+**Visual Studio Code:** Đã cài đặt trên máy tính của bạn  
+**Nếu bạn có tài khoản AWS FreeTier thì thật tuyệt vời**
 
-![MFA Policy](/images/1-account-setup/MFAPolicy.png?width=90pc)
+{{% notice note%}}
+Các tài khoản được tạo trong vòng 24 giờ qua có thể chưa có quyền truy cập vào các dịch vụ cần thiết cho lab này
+{{% /notice%}}
 
-6. Ở thanh bên trái , chọn **Dashboard** và sau đó chọn **Enable MFA**.
+#### Nội dung chính
 
-![Dashboard](/images/1-account-setup/Dashboard.png?width=90pc)
-
-7. Mở rộng Multi-factor authentication (MFA) sau đó chọn **Active MFA**.
-
-![MFA Section](/images/1-account-setup/MFA.png?width=90pc)
-
-8. Trong **Manage MFA Device**, chọn **U2F security key** sau đó nhấn **Continue**.
-9. Cắm khóa bảo mật U2F vào cổng USB của máy tính.
-
-![Image](/images/1-account-setup/U2FSK.png?width=30pc)
-
-10. Nhấn vào khóa bảo mật U2F, và sau đó chọn **Close** khi U2F thiết lập thành công.
+1. [Giới thiệu](0-Introdution/)
+2. [Tạo và Triển khai 1 ứng dụng web ReactJS](1-Create-A-Web-App/)
+3. [Xây dựng hàm Serverless với AWS Lamda](2-Build-A-ServerlessFunction-Lamda/)
+4. [Tạo data table với DynamoDB](3-Create-Data-Table/)
+5. [Liên kết hàm Serverless đến ứng dụng Web](4-Link-ServerlessFunction-ToWebApp/)
+6. [Thêm tính tương tác vào ứng dụng web](5-Add-Interactivity/)
+7. [Dọn dẹp tài nguyên](6-CleanUp/)
+ <!-- need to remove parenthesis for path in Hugo 0.88.1 for Windows-->

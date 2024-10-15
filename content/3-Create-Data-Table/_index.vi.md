@@ -1,51 +1,145 @@
 +++
-title = "Tạo Admin Group và Admin User"
-date = 2021
-weight = 4
+title = "Tạo Data Table với DynamoDB và GraphQL API"
+date = 2024
+weight = 5
 chapter = false
-pre = "<b>3. </b>"
+pre = "<b>4. </b>"
 +++
 
-#### Tạo Admin Group
+**Nội dung:**
 
-1. **Đăng nhập vào Bảng điều khiển** ở trang [AWS Web Service page](https://aws.amazon.com/)
-2. Nhấn vào tên tài khoản ở góc trên bên phải và chọn **My Security Credentials**
+-   [Khởi tạo Data Table với DynamoDB](#Tạo-Data-Table-với-DynamoDB)
+-   [Cập nhật Lamda function để kết nối tới API](#Cập-nhật-Lamda-function-để-kết-nối-tới-API)
 
-![Image](/images/1-account-setup/MySecurity.png?width=15pc)
+#### Tạo Data Table với DynamoDB
 
-3. Ở thanh bên trái, chọn **User Groups** sau đó chọn **Create Group**
-4. Dưới mục **Name the group**, nhập tên Group (Ví dụ: _AdminGroup_) và cuộn chuột xuống dưới
+Trong phần này, bạn sẽ tạo một mô hình dữ liệu để lưu trữ dữ liệu bằng cách sử dụng GraphQL API và Amazon DynamoDB. Bạn sẽ sử dụng AWS Amplify CLI để tạo một GraphQL API, định nghĩa một mô hình dữ liệu, và triển khai API lên đám mây.
 
-![Image](/images/1-account-setup/GroupName.png?width=90pc)
+1. Mở terminal, di chuyển đến thư mục dự án của bạn (profilesapp), và chạy lệnh sau để tạo một mô hình dữ liệu và triển khai API GraphQL:
 
-5. Ở phần **Attach permissions policies**, gõ **AdministratorAccess** vào thanh tìm kiếm và nhấn chọn nó. Cuối cùng, chọn **Create Group**.
+![Update resource.ts](/images/workshop-setup/3_1_updateData.png?width=full)
 
-![Image](/images/1-account-setup/GroupPolicy.png?width=90pc)
+```bash
 
-#### Tạo Admin User
+import { type ClientSchema, a, defineData } from "@aws-amplify/backend";
+import { postConfirmation } from "../auth/post-confirmation/resource";
 
-1. Ở thanh bên trái, chọn **Users** sau đó chọn **Add User**
-2. Nhập tên User (Ví dụ: _AdminUser_).
+const schema = a
+  .schema({
+    UserProfile: a
+      .model({
+        email: a.string(),
+        profileOwner: a.string(),
+      })
+      .authorization((allow) => [
+        allow.ownerDefinedIn("profileOwner"),
+      ]),
+  })
+  .authorization((allow) => [allow.resource(postConfirmation)]);
+export type Schema = ClientSchema<typeof schema>;
 
--   Click **AWS Management Console access**.
--   Click **Programmatic Access**.
--   Click **Custom password** rồi gõ một password tùy ý của bạn (lưu ý: bạn phải ghi nhớ mật khẩu này cho những lần đăng nhập trong tương lai).
--   Bỏ chọn mục **User must create a new password...**.
--   Click **Next:Permissions**.
+export const data = defineData({
+  schema,
+  authorizationModes: {
+    defaultAuthorizationMode: "apiKey",
+    apiKeyAuthorizationMode: {
+      expiresInDays: 30,
+    },
+  },
+});
 
-![Image](/images/1-account-setup/AddUser.png?width=90pc)
+```
 
-{{% notice note %}}
-Bằng cách chọn **AWS Management Console access**, bạn vừa cho phép IAM User được truy cập vào AWS thông qua bảng điều khiển AWS trên web.\
- Việc bỏ mục **User must create a new password...** cho phép người dùng khi lần đầu đăng nhập vào IAM User đó không cần phải tạo mật khẩu mới.
-{{% /notice %}}
+2. Chạy lệnh sau để triển khai tài nguyên backend được xác định trong dự án Amplify của bạn lên AWS. Nó sẽ cung cấp các tài nguyên đám mây cần thiết, chẳng hạn như GraphQL API và bảng DynamoDB, dựa trên cấu hình của dự án của bạn.
 
-3. Click tab **Add user to group** và click **AdminGroup** mà chúng ta tạo trước đó.
-4. Click **Next:Tags**
-    - Tags (thẻ) là một tùy chọn không bắt buộc để tổ chức, theo dõi, hoặc điều khiển truy cập của user, thế nên bạn có thể thêm tags hoặc không.
-5. Click **Next:Review**.
-6. Kiểm tra thông tin chi tiết user sau đó chọn **Create User**.
-   {{% notice info %}}
-   Sau khi tạo user, bạn sẽ thấy hiện lên hộp thoại download thông tin access key và secret key. Đây là thông tin dùng để thực hiện **Programmatic access** tới các tài nguyên của AWS thông qua **AWS CLI** và **AWS SDK**. Tạm thời chúng ta sẽ chưa sử dụng tới.
+![Install NPX in Amplify CLI](/images/workshop-setup/3.NPX.png?width=45pc)
 
-{{% /notice %}}
+```bash
+npx ampx sandbox
+
+```
+
+3.  Sau khi sandbox đám mây đã được triển khai hoàn tất, bạn sẽ thấy một thông báo thành công trong terminal. Tệp _amplify-outputs.json_ sẽ được tạo và thêm vào thư mục dự án của bạn.
+
+![Deploy Sandbox successfull](/images/workshop-setup/3.1_AddSandbox.png?width=full)
+
+4. Mở cửa sổ terminal mới, điều hướng đến thư mục profilesapp, và chạy lệnh sau để tạo GraphQL API:
+
+Ví dụ, nếu bạn muốn tạo GraphQL API, hãy chạy lệnh sau:  
+`npx ampx generate graphql-client-code --out amplify/auth/post-confirmation/graphql`.
+
+```bash
+
+npx ampx generate graphql-client-code --out <path-to-post-confirmation-handler-dir>/graphql
+
+```
+
+![Generate GrapQL successfull](/images/workshop-setup/3.1_generateGrapQL1.png?width=full)
+
+Lệnh này tạo mã client API GraphQL dựa trên schema được định nghĩa trong API GraphQL. Mã được tạo ra sẽ được sử dụng trong phần tiếp theo để tương tác với API GraphQL từ frontend.  
+Amplify sẽ tạo thư mục `amplify/auth/post-confirmation/graphql` nơi bạn sẽ tìm thấy mã client để kết nối với API GraphQL.
+
+#### Cập nhật Lamda function để kết nối tới API
+
+Trong thư mục dự án của bạn: điều hướng đến tệp `amplify/auth/post-confirmation/handler.ts` và cập nhật tệp với mã sau, sau đó lưu lại.
+
+![Update Handler.TS](/images/workshop-setup/2_1_updateHandlerTS.png?width=full)
+
+```bash
+
+import type { PostConfirmationTriggerHandler } from "aws-lambda";
+import { type Schema } from "../../data/resource";
+import { Amplify } from "aws-amplify";
+import { generateClient } from "aws-amplify/data";
+import { env } from "$amplify/env/post-confirmation";
+import { createUserProfile } from "./graphql/mutations";
+
+Amplify.configure(
+  {
+    API: {
+      GraphQL: {
+        endpoint: env.AMPLIFY_DATA_GRAPHQL_ENDPOINT,
+        region: env.AWS_REGION,
+        defaultAuthMode: "iam",
+      },
+    },
+  },
+  {
+    Auth: {
+      credentialsProvider: {
+        getCredentialsAndIdentityId: async () => ({
+          credentials: {
+            accessKeyId: env.AWS_ACCESS_KEY_ID,
+            secretAccessKey: env.AWS_SECRET_ACCESS_KEY,
+            sessionToken: env.AWS_SESSION_TOKEN,
+          },
+        }),
+        clearCredentialsAndIdentityId: () => {
+          /* noop */
+        },
+      },
+    },
+  }
+);
+
+const client = generateClient<Schema>({
+  authMode: "iam",
+});
+
+export const handler: PostConfirmationTriggerHandler = async (event) => {
+  await client.graphql({
+    query: createUserProfile,
+    variables: {
+      input: {
+        email: event.request.userAttributes.email,
+        profileOwner: `${event.request.userAttributes.sub}::${event.userName}`,
+      },
+    },
+  });
+
+  return event;
+};
+
+```
+
+Bạn đã tạo một bảng dữ liệu và cấu hình một API GraphQL để lưu trữ dữ liệu trong cơ sở dữ liệu Amazon DynamoDB. Sau đó, bạn đã cập nhật hàm Lambda để sử dụng API.
